@@ -43,6 +43,9 @@ RUN printf "\ntracker ALL=(ALL:ALL) NOPASSWD:ALL\n" >> /etc/sudoers
 
 USER tracker
 
+# some handy scripts to help the roundup management
+ADD bin /home/tracker/bin
+
 # shell settings
 ADD rc.sh /home/tracker/rc.sh
 RUN printf '\n. %s\n' '~/rc.sh' >> ~/.bashrc
