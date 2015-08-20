@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 
 import os.path as osp
-roundup_path = osp.realpath(osp.join(osp.dirname(__file__), '../'))
+# roundup_path = osp.realpath(osp.join(osp.dirname(__file__), '../'))
+roundup_path = "/opt/tracker/roundup"
 
 import sys
 sys.path.append(roundup_path)
