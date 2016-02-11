@@ -1,8 +1,7 @@
 FROM ubuntu:14.04
 
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get update && apt-get install -y language-pack-en -y && update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX \
+RUN apt-get update && apt-get install -y language-pack-en -y \
+    && update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX \
     && apt-get install -y postgresql postgresql-contrib
 
 # for ease of development, give privilege to every local user
@@ -24,7 +23,7 @@ ENV PYTHONUNBUFFERED 1
 
 VOLUME ["/opt/tracker/"]
 
-# NB python-dev, libffi-dev, libssl-dev are required by pyoic
+# python-dev, libffi-dev, libssl-dev are required by pyoic
 RUN apt-get install -y python python-psycopg2 python-pip python-dev libffi-dev libssl-dev
 
 ADD requirements.txt /requirements.txt
@@ -39,7 +38,7 @@ ENTRYPOINT ["/init.sh"]
 
 # roundup doesn't allow running as root
 RUN useradd -ms /bin/bash tracker
-RUN printf "\ntracker ALL=(ALL:ALL) NOPASSWD:ALL\n" >> /etc/sudoers
+RUN echo "tracker ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER tracker
 
@@ -47,7 +46,7 @@ USER tracker
 ADD bin /home/tracker/bin
 
 # shell settings
-ADD rc.sh /home/tracker/rc.sh
-RUN printf '\n. %s\n' '~/rc.sh' >> ~/.bashrc
+RUN echo "alias rd-start=\"/home/tracker/bin/roundup-server -n 0.0.0.0 -p 8888 python-dev=/opt/tracker/python-dev\"" >> ~/.bashrc
+RUN echo "alias rd-admin=\"/home/tracker/bin/roundup-admin -i /opt/tracker/python-dev\"" >> ~/.bashrc
 
 EXPOSE 8888

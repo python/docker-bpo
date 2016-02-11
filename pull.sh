@@ -1,7 +1,6 @@
 #!/bin/sh
 
 hg clone -q https://hg.python.org/tracker/roundup
-# hg clone -q https://bitbucket.org/introom/cpython-roundup roundup
 (cd roundup; hg up -q bugs.python.org)
 
 hg clone -q https://hg.python.org/tracker/python-dev python-dev
