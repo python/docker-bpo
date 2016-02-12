@@ -43,7 +43,7 @@ Usage
 5. Run b.p.o container:
 
   ```
-  docker run --rm -it -p 8888:8888 -v $DIR_TRACKER:/opt/tracker introom/b.p.o
+  docker run --rm -it -p 9999:9999 -v $DIR_TRACKER:/opt/tracker introom/b.p.o
   ```
 
   where `$DIR_TRACKER` is directory where you cloned both roundup and python-dev.
@@ -61,7 +61,7 @@ Usage
   rd-start
   ```
 
-7. Your local instance of bugs.python.org should be available under http://localhost:8888
+7. Your local instance of bugs.python.org should be available under http://localhost:9999
 
 
 Build
@@ -88,5 +88,9 @@ If you have problems with empty `/opt/tracker` directory it means that SELinux
 is causing the problem, append `:Z` which will apply appropriate SELinux context:
 
 ```
-docker run --rm -it -p 8888:8888 -v $DIR_TRACKER:/opt/tracker:Z introom/b.p.o
+docker run --rm -it -p 9999:9999 -v $DIR_TRACKER:/opt/tracker:Z introom/b.p.o
 ```
+
+On some systems (Fedora, Red Hat, Centos) due to security constraints docker
+requires `sudo` to be run, make sure to update above commands appropriately in
+that case.
