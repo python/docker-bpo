@@ -46,7 +46,7 @@ USER tracker
 ADD bin /home/tracker/bin
 
 # shell settings
-RUN echo "alias rd-start=\"/home/tracker/bin/roundup-server -n 0.0.0.0 -p 8888 python-dev=/opt/tracker/python-dev\"" >> ~/.bashrc
+RUN echo "alias rd-start=\"/home/tracker/bin/roundup-server -n 0.0.0.0 -p 9999 python-dev=/opt/tracker/python-dev\"" >> ~/.bashrc
 RUN echo "alias rd-admin=\"/home/tracker/bin/roundup-admin -i /opt/tracker/python-dev\"" >> ~/.bashrc
 
-EXPOSE 8888
+EXPOSE 9999
