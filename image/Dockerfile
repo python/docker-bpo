@@ -1,20 +1,17 @@
-FROM ubuntu:14.04
+FROM fedora:24
 
-RUN apt-get update && apt-get install -y language-pack-en -y \
-    && update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX \
-    && apt-get install -y postgresql postgresql-contrib
+RUN dnf -yv clean all && dnf -yv update
 
-# for ease of development, give privilege to every local user
-RUN sed -i '/^#/!{s/peer/trust/;s/md5/trust/;}' /etc/postgresql/9.3/main/pg_hba.conf
+RUN dnf -yv install postgresql postgresql-server postgresql-contrib postgresql-libs postgresql-devel
 
-RUN /etc/init.d/postgresql start && \
-    psql -U postgres \
-      --command "CREATE USER roundup; ALTER USER roundup WITH CREATEDB"
+ENV PGDATA /var/lib/pgsql/data
 
-# allow backup of config, logs and databases
-# maybe we don't need this
-# VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
+ENV PGSTARTTIMEOUT 270
 
+RUN su - postgres -c "initdb ${PGDATA}; /usr/libexec/postgresql-check-db-dir %N; /usr/libexec/postgresql-ctl start -D ${PGDATA} -s -w -t ${PGSTARTTIMEOUT}" && \
+    psql -U postgres --command "CREATE USER roundup; ALTER USER roundup WITH CREATEDB"
+
+RUN sed -i '/^#/!{s/peer/trust/;s/md5/trust/;}' /var/lib/pgsql/data/pg_hba.conf
 
 # TRACKER SPECIFIC
 
@@ -24,7 +21,7 @@ ENV PYTHONUNBUFFERED 1
 VOLUME ["/opt/tracker/"]
 
 # python-dev, libffi-dev, libssl-dev are required by pyoic
-RUN apt-get install -y python python-psycopg2 python-pip python-dev libffi-dev libssl-dev
+RUN dnf -yv install python python-psycopg2 python-pip python-devel libffi-devel openssl-devel gcc-c++ redhat-rpm-config
 
 ADD requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt

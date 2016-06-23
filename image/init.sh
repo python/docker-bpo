@@ -3,11 +3,11 @@
 trap stop_all HUP INT QUIT KILL TERM
 
 # start postgres
-sudo /etc/init.d/postgresql start >/dev/null
+su - postgres -c "/usr/libexec/postgresql-ctl start -D ${PGDATA} -s -w -t ${PGSTARTTIMEOUT}"
 
 stop_all() {
   echo stopping!
-  sudo /etc/init.d/postgresql stop
+  su - postgres -c "/usr/libexec/postgresql-ctl stop -D ${PGDATA} -s -m fast"
 }
 
 if [ $# -eq 0 ]; then
