@@ -3,7 +3,7 @@ About
 This repository is a fork of the work done in https://bitbucket.org/introom/docker-b.p.o
 
 This repository serves as a helper for running development instance of
-[ruoundup](http://roundup-tracker.org/) tracker living at http://bugs.python.org
+[roundup](http://roundup-tracker.org/) tracker living at http://bugs.python.org
 
 
 Usage
