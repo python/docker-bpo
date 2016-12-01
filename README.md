@@ -70,11 +70,14 @@ Build
 Building this image locally is as simple as running:
 
 ```
-make REPO=username
+make USERNAME=username
 ```
 
-where `REPO=username` will be the repository name for your docker images.  If none
-is specified `unknown` will be used.
+where `USERNAME=username` will be the repository name for your docker images.
+If none is specified, `unknown` will be used.
+
+Aditionally you can specify which base image will be used for your docker image.
+To do so specify `BASE_DISTRO=fedora`, in all other cases ubuntu will be used.
 
 
 Troubleshooting
