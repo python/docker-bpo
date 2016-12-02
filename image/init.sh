@@ -1,26 +1,27 @@
 #!/bin/sh
-if which apt-get > /dev/null; then \
-  # start postgres
-  sudo /etc/init.d/postgresql start >/dev/null
 
-  stop_all() {
-    echo stopping!
-    sudo /etc/init.d/postgresql stop
-  }
-elif which dnf > /dev/null; then \
-  # start postgres
-  su - postgres -c "/usr/libexec/postgresql-ctl start -D ${PGDATA} -s -w -t ${PGSTARTTIMEOUT}"
+if command -v dnf > /dev/null; then
+    echo "===== Starting postgresql ====="
+    sudo su - postgres -c "/usr/libexec/postgresql-ctl restart -D ${PGDATA} -s -w -t ${PGSTARTTIMEOUT}"
 
-  stop_all() {
-    echo stopping!
-    su - postgres -c "/usr/libexec/postgresql-ctl stop -D ${PGDATA} -s -m fast"
-  }
+    function stop_all() {
+        echo "===== Stopping postgresql ====="
+        sudo su - postgres -c "/usr/libexec/postgresql-ctl stop -D ${PGDATA} -s -m fast"
+    }
+else
+    echo "===== Starting postgresql ====="
+    sudo /etc/init.d/postgresql restart >/dev/null
+
+    function stop_all() {
+        echo "===== Stopping postgresql ====="
+        sudo /etc/init.d/postgresql stop
+    }
 fi
 
 trap stop_all HUP INT QUIT KILL TERM
 
 if [ $# -eq 0 ]; then
-  /bin/bash
+    /bin/bash
 else
-  /bin/bash -c "$@"
+    /bin/bash -c "$@"
 fi
