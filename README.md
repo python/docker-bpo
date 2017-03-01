@@ -98,7 +98,7 @@ If you have problems with empty `/opt/tracker` directory it means that SELinux
 is causing the problem, append `:Z` which will apply appropriate SELinux context:
 
 ```
-docker run --rm -it -p 9999:9999 -v $DIR_TRACKER:/opt/tracker:Z introom/b.p.o
+docker run --rm -it -p 9999:9999 -v `pwd`:/opt/tracker:Z username/b.p.o
 ```
 
 On some systems (Fedora, Red Hat, Centos) due to security constraints docker
