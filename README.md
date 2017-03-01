@@ -24,7 +24,7 @@ Usage
   ```
   hg clone https://hg.python.org/tracker/roundup
   cd roundup
-  hg up bugs.python.org
+  hg update bugs.python.org
   ```
 
 3. Clone the `python-dev` instance alongside with roundup:
