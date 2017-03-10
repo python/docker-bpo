@@ -10,6 +10,13 @@ function stop_all() {
 
 trap stop_all HUP INT QUIT KILL TERM
 
+
+# initialize the db (pwd: admin) and create users
+sleep 5  # wait for PG to start...
+/home/tracker/bin/roundup-admin -i /opt/tracker/python-dev init admin
+python3 /home/tracker/bin/createusers.py
+
+
 if [ $# -eq 0 ]; then
     /bin/bash
 else
