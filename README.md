@@ -53,28 +53,30 @@ Usage
   This will launch the container in interactive mode, and mount the dir
   with the clones to the container's `/opt/tracker`.
 
-6. Create a new empty instance of `python-dev` using:
-
-  ```
-  rd-admin init
-  ```
-
-7. Run it using:
+6. Every time the container is run, the tracker is initialized and 3
+  users are created.  You can then run the tracker with:
 
   ```
   rd-start
   ```
 
-8. Your local instance of bugs.python.org should be available under
+7. Your local instance of bugs.python.org should be available at
   http://localhost:9999
+  On top of the two default users (`admin` and `anonymous`),
+  3 additional users are also available:
+  * `user`: a regular user
+  * `developer`: a developer (triager) that signed the cla
+  * `coordinator`: a coordinator and committer that signed the cla
+
+  You can login as any of these 3 users using `pass` as password.
 
 
 Notes
 -----
 * Every time you stop the container, all the users and issues you
   created will be deleted.
-* Every time you start the container, you will need to run
-  `rd-admin init` again and reinitialize the tracker.
+* Every time you start the container, the tracker is initialized
+  and the 3 users are created.
 * Once the container is running, you can start and stop the tracker
   with `rd-start` and `ctrl+c`.
 * When you register a new user, look in `python-dev/debugmail.txt`:
