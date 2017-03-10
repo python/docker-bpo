@@ -8,4 +8,12 @@ import sys
 sys.path.append(roundup_path)
 
 from roundup.scripts.roundup_admin import run
-run()
+from roundup.hyperdb import DatabaseError
+
+while True:
+    try:
+        run()
+    except DatabaseError:
+        pass
+    else:
+        break
