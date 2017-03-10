@@ -1,26 +1,19 @@
 #!/bin/bash
 
-echo "===== Starting postgresql ====="
+echo "* Starting postgresql..."
 sudo /etc/init.d/postgresql restart >/dev/null
 
 function stop_all() {
-    echo "===== Stopping postgresql ====="
+    echo "* Stopping postgresql..."
     sudo /etc/init.d/postgresql stop
 }
 
 trap stop_all HUP INT QUIT KILL TERM
 
 
-# wait for postgresql to be available
-while true; do
-    curl --max-time 2 --fail --silent http://localhost:5432/
-    if [[ $? -eq 52 ]]; then
-        break
-    fi
-    sleep 1
-done
 
 # initialize the db (pwd: admin) and create users
+echo "* Initializing Roundup..."
 /home/tracker/bin/roundup-admin -i /opt/tracker/python-dev init admin
 python3 /home/tracker/bin/createusers.py
 
