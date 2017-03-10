@@ -1,4 +1,4 @@
-FROM ubuntu:16.10
+FROM debian:8.7
 
 # fetch latest updates and install postgresql
 RUN apt-get update && \
@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get clean
 
 # for ease of development, give privilege to every local user
-RUN sed -i '/^#/!{s/peer/trust/;s/md5/trust/;}' /etc/postgresql/9.5/main/pg_hba.conf && \
+RUN sed -i '/^#/!{s/peer/trust/;s/md5/trust/;}' /etc/postgresql/9.6/main/pg_hba.conf && \
     # setup postgresql
     /etc/init.d/postgresql start && \
     psql -U postgres --command "CREATE USER roundup; ALTER USER roundup WITH CREATEDB"
