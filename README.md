@@ -14,8 +14,7 @@ Usage
   ```
 
   where `username` will be the repository name for your Docker image
-  (default: `unknown`).  You can also use e.g. `BASE_DISTRO=fedora` 
-  to specify the base distribution (default: `ubuntu`).
+  (default: `unknown`).
 
   Note: in the future this image will be moved do DockerHub.
 
@@ -72,14 +71,14 @@ Usage
 
 Notes
 -----
-* Every time you stop the container, all the users and issues you 
-  created will be deleted
-* Every time you start the container, you will need to run 
-  `rd-admin init` again and reinitialize the tracker
+* Every time you stop the container, all the users and issues you
+  created will be deleted.
+* Every time you start the container, you will need to run
+  `rd-admin init` again and reinitialize the tracker.
 * Once the container is running, you can start and stop the tracker
-  with `rd-start` and `ctrl+c`
+  with `rd-start` and `ctrl+c`.
 * When you register a new user, look in `python-dev/debugmail.txt`:
-  you will find a confirmation URL.  Copy it in your broswer and 
+  you will find a confirmation URL.  Copy it in your broswer and
   replace all the escaped `=3D` with `=`.
 * You can edit the code in `roundup` and `python-dev` from outside
   the container, since those dir are shared.

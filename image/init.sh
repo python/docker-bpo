@@ -1,22 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-if command -v dnf > /dev/null; then
-    echo "===== Starting postgresql ====="
-    sudo su - postgres -c "/usr/libexec/postgresql-ctl restart -D ${PGDATA} -s -w -t ${PGSTARTTIMEOUT}"
+echo "===== Starting postgresql ====="
+sudo /etc/init.d/postgresql restart >/dev/null
 
-    stop_all() {
-        echo "===== Stopping postgresql ====="
-        sudo su - postgres -c "/usr/libexec/postgresql-ctl stop -D ${PGDATA} -s -m fast"
-    }
-else
-    echo "===== Starting postgresql ====="
-    sudo /etc/init.d/postgresql restart >/dev/null
-
-    stop_all() {
-        echo "===== Stopping postgresql ====="
-        sudo /etc/init.d/postgresql stop
-    }
-fi
+function stop_all() {
+    echo "===== Stopping postgresql ====="
+    sudo /etc/init.d/postgresql stop
+}
 
 trap stop_all HUP INT QUIT KILL TERM
 
