@@ -37,7 +37,6 @@ Usage
   ```
   cd python-dev
   mkdir db
-  echo postgresql > db/backend_name
   cp config.ini.template config.ini
   cp detectors/config.ini.template detectors/config.ini
   ```
