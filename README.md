@@ -7,16 +7,12 @@ http://bugs.python.org
 
 Usage
 -----
-1. Clone the repo and build the image using:
+1. Pull [python/docker-bpo](https://hub.docker.com/r/python/docker-bpo/) image from
+  docker hub:
 
   ```
-  make USERNAME=username
+  docker pull docker.io/python/docker-bpo
   ```
-
-  where `username` will be the repository name for your Docker image
-  (default: `unknown`).
-
-  Note: in the future this image will be moved do DockerHub.
 
 2. Clone roundup and switch to the `bugs.python.org` branch:
 
@@ -45,10 +41,9 @@ Usage
   `roundup` and `python-dev` and run:
 
   ```
-  docker run --rm -it -p 9999:9999 -v `pwd`:/opt/tracker username/b.p.o
+  docker run --rm -it -p 9999:9999 -v `pwd`:/opt/tracker docker.io/python/docker-bpo
   ```
 
-  (replace `username` with the value used during `make`).
   This will launch the container in interactive mode, and mount the dir
   with the clones to the container's `/opt/tracker`.
 
@@ -98,7 +93,7 @@ If you have problems with empty `/opt/tracker` directory it means that SELinux
 is causing the problem, append `:Z` which will apply appropriate SELinux context:
 
 ```
-docker run --rm -it -p 9999:9999 -v `pwd`:/opt/tracker:Z username/b.p.o
+docker run --rm -it -p 9999:9999 -v `pwd`:/opt/tracker:Z docker.io/python/docker-bpo
 ```
 
 On some systems (Fedora, Red Hat, Centos) due to security constraints docker
