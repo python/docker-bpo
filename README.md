@@ -17,7 +17,7 @@ Usage
 2. Clone roundup and switch to the `bugs.python.org` branch:
 
   ```
-  hg clone https://hg.python.org/tracker/roundup
+  hg clone https://bitbucket.org/python/roundup
   cd roundup
   hg update bugs.python.org
   ```
@@ -25,7 +25,7 @@ Usage
 3. Clone the `python-dev` instance alongside with roundup:
 
   ```
-  hg clone https://hg.python.org/tracker/python-dev
+  hg clone https://bitbucket.org/python/tracker-cpython python-dev
   ```
 
 4. Setup configuration:
