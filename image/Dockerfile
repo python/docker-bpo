@@ -2,7 +2,7 @@ FROM debian:9
 
 # fetch latest updates and install postgresql
 RUN apt-get update && \
-    apt-get install -y sudo postgresql postgresql-contrib && \
+    apt-get --no-install-recommends install -y sudo postgresql postgresql-contrib && \
     apt-get clean
 
 # for ease of development, give privilege to every local user
@@ -21,7 +21,7 @@ ENV PYTHONUNBUFFERED=1
 VOLUME ["/opt/tracker/"]
 
 # install python-dev, libffi-dev, libssl-dev are required by pyoic
-RUN apt-get install -y python python-psycopg2 python-pip python-dev libffi-dev libssl-dev curl && \
+RUN apt-get --no-install-recommends install -y python python-psycopg2 python-pip python-dev libffi-dev libssl-dev curl && \
     apt-get clean
 
 ADD requirements.txt init.sh /
