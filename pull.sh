@@ -1,14 +1,14 @@
 #!/bin/sh
 
 echo "===== Downloading roundup sources ====="
-hg clone -q https://hg.python.org/tracker/roundup
+git clone git@github.com:psf/bpo-roundup roundup
 (
     cd roundup
-    hg up -q bugs.python.org
+    git checkout bugs.python.org
 )
 
 echo "===== Downloading python-dev sources ====="
-hg clone -q https://hg.python.org/tracker/python-dev python-dev
+git clone git@github.com:psf/bpo-tracker-cpython python-dev
 (
     cd python-dev
     mkdir db

@@ -17,15 +17,16 @@ Usage
 2. Clone roundup and switch to the `bugs.python.org` branch:
 
   ```
-  hg clone https://bitbucket.org/python/roundup
+  git clone git@github.com:psf/bpo-roundup roundup
   cd roundup
-  hg update bugs.python.org
+  git checkout bugs.python.org
+  cd ..
   ```
 
 3. Clone the `python-dev` instance alongside with roundup:
 
   ```
-  hg clone https://bitbucket.org/python/tracker-cpython python-dev
+  git clone git@github.com:psf/bpo-tracker-cpython python-dev
   ```
 
 4. Setup configuration:
@@ -35,6 +36,7 @@ Usage
   mkdir db
   cp config.ini.template config.ini
   cp detectors/config.ini.template detectors/config.ini
+  cd ..
   ```
 
 5. To run the b.p.o container, `cd` in the dir where you cloned both
